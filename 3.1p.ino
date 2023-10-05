@@ -20,8 +20,6 @@ void setup() {
 }
 
 void loop() {
-  // Reading temperature takes about 250 milliseconds!
-  // Sensor readings may also be up to 2 seconds 'old' (slow sensor)
   float temperature = dht.readTemperature();  // Read temperature in Celsius
 
   if (isnan(temperature)) {
@@ -44,5 +42,5 @@ void loop() {
     Serial.println("Failed to send data to ThingSpeak. Error code: " + String(status));
   }
 
-  delay(20000);  // Wait for a few seconds before taking the next reading (ThingSpeak update rate limit is 15 seconds)
+  delay(20000);  
 }
