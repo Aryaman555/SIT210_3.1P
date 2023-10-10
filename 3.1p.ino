@@ -1,15 +1,37 @@
 #include <DHT.h>
 #include <ThingSpeak.h>
+#include <WiFiNINA.h>
 
 #define DHTPIN 2        // Digital pin connected to the DHT sensor
 #define DHTTYPE DHT22   // DHT 22 
 
 DHT dht(DHTPIN, DHTTYPE);
 
+char ssid[] = "Aryaman";          // Wifi Name
+char password[] = "arya2703";  // wifi Password
+
 // ThingSpeak settings
 char thingSpeakApiKey[] = "Z69XOJRIPKDAKJB9";  
 unsigned long channelID = 2251816; 
 WiFiClient client;
+
+ if (WiFi.status() == WL_NO_MODULE) {
+    Serial.println("Communication with WiFi module failed!");
+    while (true) // Wait till module available
+      ;
+  }
+
+  // connect to Wifi Network
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  while (WiFi.begin(ssid, password) != WL_CONNECTED) {
+    Serial.print("Connecting to ");
+    Serial.println(ssid);
+    delay(1000);
+  }
+  Serial.println("WiFi connection established.");
+}
+
 
 void setup() {
   Serial.begin(9600);
